@@ -1,0 +1,27 @@
+type Loan @entity {
+  id: ID! # `${account}-${tokenname}`
+  account: String
+  collateralAmount: BigInt
+  collateralCurrency: String
+  collateralExchangeRate: BigInt
+  debitAmount: BigInt
+  debitExchangeRate: BigInt
+  collateralAmountUSD: BigInt
+  debitAmountUSD: BigInt
+  loanToCollateralRatio: BigInt
+  blockNumber: BigInt
+  timestamp: Date
+  txCount: BigInt
+}
+
+type Liquidation @entity {
+  id: ID! # `${account}-${tokenname}`
+  account: String
+  collateralChanged: BigInt
+  collateralAmount: BigInt
+  badDebtAmount: BigInt
+  liquidationStrategy: String
+  blockNumber: BigInt
+  timestamp: Date
+}
+
