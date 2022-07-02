@@ -17,7 +17,7 @@ type Loan @entity {
 type Liquidation @entity {
   id: ID! # `${account}-${tokenname}`
   account: String
-  collateralChanged: BigInt
+  collateralCurrency: String
   collateralAmount: BigInt
   badDebtAmount: BigInt
   liquidationStrategy: String

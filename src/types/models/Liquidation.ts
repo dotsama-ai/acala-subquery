@@ -18,7 +18,7 @@ export class Liquidation implements Entity {
 
     public account?: string;
 
-    public collateralChanged?: bigint;
+    public collateralCurrency?: string;
 
     public collateralAmount?: bigint;
 

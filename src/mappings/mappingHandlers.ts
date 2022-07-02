@@ -64,7 +64,7 @@ export async function handleLiquidateUnsafeCDP(event: SubstrateEvent): Promise<v
     let timestamp = event.block.timestamp;
     const [_collateral, account, collateral_amount, bad_debt_value, liquidation_strategy] = event.event.data as unknown as [CurrencyId, AccountId, Balance, Balance, Balance];
 
-    logger.info("== _collateralChanged: " + BigInt(_collateral.toString()))
+    logger.info("== _collateralCurrency: " + forceToCurrencyName(_collateral))
     logger.info("== account: " + account)
     logger.info("== collateral_amount: " + collateral_amount)
     logger.info("== bad_debt_value: " + bad_debt_value)
@@ -78,7 +78,7 @@ export async function handleLiquidateUnsafeCDP(event: SubstrateEvent): Promise<v
             account: account.toString()
         });
     }
-    record.collateralChanged = BigInt(_collateral.toString())
+    record.collateralCurrency = forceToCurrencyName(_collateral)
     record.collateralAmount = record.collateralAmount?record.collateralAmount+BigInt(collateral_amount.toString()):BigInt(collateral_amount.toString());
     record.badDebtAmount = record.badDebtAmount?record.badDebtAmount+BigInt(bad_debt_value.toString()):BigInt(bad_debt_value.toString());
     record.blockNumber = blockNumber
