@@ -71,8 +71,10 @@ export async function handleLiquidateUnsafeCDP(event: SubstrateEvent): Promise<v
     logger.info("== liquidation_strategy: " + liquidation_strategy)
 
     let id = blockNumber + "_" + account
+    logger.info("== id: " + id)
     let record = await Liquidation.get(id);
     if (!record) {
+        logger.info("== No liquidation record found. Creating one: ")
         record = Liquidation.create({
             id: id,
             account: account.toString()
@@ -83,6 +85,7 @@ export async function handleLiquidateUnsafeCDP(event: SubstrateEvent): Promise<v
     record.badDebtAmount = record.badDebtAmount?record.badDebtAmount+BigInt(bad_debt_value.toString()):BigInt(bad_debt_value.toString());
     record.blockNumber = blockNumber
     record.timestamp = timestamp
+    logger.info("== About to save record: ")
     await record.save().then((ress) => {
         logger.info("totalAccount save =>"+ ress)
     })
