@@ -4,10 +4,10 @@ type Loan @entity {
   collateralAmount: BigInt
   collateralCurrency: String
   collateralExchangeRate: BigInt
-  debitAmount: BigInt
-  debitExchangeRate: BigInt
   collateralAmountUSD: BigInt
   collateralDecimal: BigInt
+  debitAmount: BigInt
+  debitExchangeRate: BigInt
   debitAmountUSD: BigInt
   stableCoinDecimal: BigInt
   loanToCollateralRatio: BigInt
@@ -21,10 +21,14 @@ type Liquidation @entity {
   account: String
   collateralCurrency: String
   collateralAmount: BigInt
-  badDebtAmount: BigInt
-  liquidationStrategy: String
+  collateralExchangeRate: BigInt
+  collateralAmountUSD: BigInt
   collateralDecimal: BigInt
+  debitAmount: BigInt
+  debitExchangeRate: BigInt
+  debitAmountUSD: BigInt
   stableCoinDecimal: BigInt
+  liquidationStrategy: String
   blockNumber: BigInt
   timestamp: Date
 }
