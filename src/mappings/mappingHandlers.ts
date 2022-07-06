@@ -37,6 +37,7 @@ export async function handlePositionUpdated(event: SubstrateEvent): Promise<void
 	const collateralDecimals = await getTokenDecimals(api as any, record.collateralCurrency);
     let collateralAmountUSD = getVolumeUSD(record.collateralAmount, collateralDecimals, collateralExchangeRate)
 	record.collateralAmountUSD = collateralAmountUSD
+    record.collateralDecimal=collateralDecimals
 
     let debitExchangeRate = await queryExchangeRate(record.collateralCurrency)
 	record.debitExchangeRate = debitExchangeRate
@@ -44,6 +45,7 @@ export async function handlePositionUpdated(event: SubstrateEvent): Promise<void
 	const stableCoinDecimals = await getTokenDecimals(api as any, getStableCoinCurrency(api as any));
     let debitAmountUSD = getVolumeUSD(record.debitAmount, stableCoinDecimals, debitExchangeRate)
 	record.debitAmountUSD = debitAmountUSD
+    record.stableCoinDecimal = stableCoinDecimals 
 	//record.loanToCollateralRatio = collateralAmountUSD/record.debitAmount
 	//logger.info("Exchange rate: " + exchangeRate)
 	//logger.info("Debit USD " + debitAmountUSD)

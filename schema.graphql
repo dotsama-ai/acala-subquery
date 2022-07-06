@@ -7,7 +7,9 @@ type Loan @entity {
   debitAmount: BigInt
   debitExchangeRate: BigInt
   collateralAmountUSD: BigInt
+  collateralDecimal: BigInt
   debitAmountUSD: BigInt
+  stableCoinDecimal: BigInt
   loanToCollateralRatio: BigInt
   blockNumber: BigInt
   timestamp: Date
