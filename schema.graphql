@@ -23,6 +23,8 @@ type Liquidation @entity {
   collateralAmount: BigInt
   badDebtAmount: BigInt
   liquidationStrategy: String
+  collateralDecimal: BigInt
+  stableCoinDecimal: BigInt
   blockNumber: BigInt
   timestamp: Date
 }

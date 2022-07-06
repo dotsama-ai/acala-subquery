@@ -84,7 +84,13 @@ export async function handleLiquidateUnsafeCDP(event: SubstrateEvent): Promise<v
     }
     record.collateralCurrency = forceToCurrencyName(_collateral)
     record.collateralAmount = record.collateralAmount?record.collateralAmount+BigInt(collateral_amount.toString()):BigInt(collateral_amount.toString());
+    const collateralDecimals = await getTokenDecimals(api as any, record.collateralCurrency);
+    record.collateralDecimal=collateralDecimals 
+
     record.badDebtAmount = record.badDebtAmount?record.badDebtAmount+BigInt(bad_debt_value.toString()):BigInt(bad_debt_value.toString());
+    const stableCoinDecimals = await getTokenDecimals(api as any, getStableCoinCurrency(api as any));
+    record.stableCoinDecimal = stableCoinDecimals 
+    
     record.blockNumber = blockNumber
     record.timestamp = timestamp
     logger.info("== About to save record: ")
