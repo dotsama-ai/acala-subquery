@@ -84,8 +84,17 @@ export async function handleLiquidateUnsafeCDP(event: SubstrateEvent): Promise<v
     }
     record.collateralCurrency = forceToCurrencyName(_collateral)
     record.collateralAmount = record.collateralAmount?record.collateralAmount+BigInt(collateral_amount.toString()):BigInt(collateral_amount.toString());
+
+    const price = await queryPriceFromOracle(api as any, event.block, record.collateralCurrency)
+    .catch(() => Promise.resolve(FixedPointNumber.ZERO));
+    let collateralExchangeRate = BigInt((price || FixedPointNumber.ZERO).toChainData())
+    record.collateralExchangeRate = collateralExchangeRate
+
     const collateralDecimals = await getTokenDecimals(api as any, record.collateralCurrency);
     record.collateralDecimal=collateralDecimals 
+
+    let collateralAmountUSD = getVolumeUSD(record.collateralAmount, collateralDecimals, collateralExchangeRate)
+    record.collateralAmountUSD = collateralAmountUSD
 
     let debitExchangeRate = await queryExchangeRate(record.collateralCurrency)
 	record.debitExchangeRate = debitExchangeRate

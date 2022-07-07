@@ -22,7 +22,19 @@ export class Liquidation implements Entity {
 
     public collateralAmount?: bigint;
 
-    public badDebtAmount?: bigint;
+    public collateralExchangeRate?: bigint;
+
+    public collateralAmountUSD?: bigint;
+
+    public collateralDecimal?: bigint;
+
+    public debitAmount?: bigint;
+
+    public debitExchangeRate?: bigint;
+
+    public debitAmountUSD?: bigint;
+
+    public stableCoinDecimal?: bigint;
 
     public liquidationStrategy?: string;
 
