@@ -87,7 +87,10 @@ export async function handleLiquidateUnsafeCDP(event: SubstrateEvent): Promise<v
     const collateralDecimals = await getTokenDecimals(api as any, record.collateralCurrency);
     record.collateralDecimal=collateralDecimals 
 
-    record.debitAmount = record.badDebtAmount?record.badDebtAmount+BigInt(bad_debt_value.toString()):BigInt(bad_debt_value.toString());
+    let debitExchangeRate = await queryExchangeRate(record.collateralCurrency)
+	record.debitExchangeRate = debitExchangeRate
+    
+    record.debitAmount = record.debitAmount?record.debitAmount+BigInt(bad_debt_value.toString()):BigInt(bad_debt_value.toString());
     const stableCoinDecimals = await getTokenDecimals(api as any, getStableCoinCurrency(api as any));
     let debitAmountUSD = getVolumeUSD(record.debitAmount, stableCoinDecimals, debitExchangeRate)
 	record.debitAmountUSD = debitAmountUSD

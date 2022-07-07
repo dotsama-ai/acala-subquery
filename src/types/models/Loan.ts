@@ -24,13 +24,17 @@ export class Loan implements Entity {
 
     public collateralExchangeRate?: bigint;
 
+    public collateralAmountUSD?: bigint;
+
+    public collateralDecimal?: bigint;
+
     public debitAmount?: bigint;
 
     public debitExchangeRate?: bigint;
 
-    public collateralAmountUSD?: bigint;
-
     public debitAmountUSD?: bigint;
+
+    public stableCoinDecimal?: bigint;
 
     public loanToCollateralRatio?: bigint;
 
